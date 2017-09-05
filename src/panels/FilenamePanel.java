@@ -37,5 +37,9 @@ public class FilenamePanel extends JPanel {
 		filenameTextField.setLocation(10, 30);
 		this.add(filenameTextField);
 	}
+	
+	public String getFilenamePath() {
+		return filenameTextField.getText().toString();
+	}
 
 }

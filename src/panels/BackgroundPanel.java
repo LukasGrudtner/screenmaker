@@ -14,7 +14,6 @@ public class BackgroundPanel extends JPanel {
 		setPanel();
 		createBackgroundLabel();
 		createBackgroundTextField();
-		
 	}
 	
 	private void setPanel() {
@@ -36,6 +35,10 @@ public class BackgroundPanel extends JPanel {
 		backgroundTextField.setSize(150, 30);
 		backgroundTextField.setLocation(10, 30);
 		this.add(backgroundTextField);
+	}
+	
+	public String getBackgroundPath() {
+		return backgroundTextField.getText().toString();
 	}
 
 }

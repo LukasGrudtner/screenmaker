@@ -27,7 +27,7 @@ public class TransitionImagePanel extends JPanel {
 	private void setPanel() {
 		setSize(410, 130);
 		setLayout(null);
-		setLocation(40, 250);
+		setLocation(40, 390);
 		setBorder(new javax.swing.border.LineBorder(Color.gray, 1, true));
 	}
 	

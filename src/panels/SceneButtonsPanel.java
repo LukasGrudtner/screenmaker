@@ -47,4 +47,16 @@ public class SceneButtonsPanel extends JPanel {
 		this.add(finalSceneButton);
 	}
 	
+	public JButton getInitialSceneButton() {
+		return initialSceneButton;
+	}
+	
+	public JButton getIntermediateSceneButton() {
+		return intermediateSceneButton;
+	}
+	
+	public JButton getFinalSceneButton() {
+		return finalSceneButton;
+	}
+	
 }

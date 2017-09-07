@@ -100,5 +100,35 @@ public class TransitionImagePanel extends JPanel {
 		labelHeight.setLocation(180, 60);
 		this.add(labelHeight);
 	}
+	
+	public String getImagePath() {
+		String imagePath = imagePathTextField.getText().toString();
+		imagePathTextField.setText("");
+		return imagePath;
+	}
+	
+	public int getXImage() {
+		int x = Integer.parseInt(xTextField.getText().toString());
+		xTextField.setText("");
+		return x;
+	}
+	
+	public int getYImage() {
+		int y = Integer.parseInt(yTextField.getText().toString());
+		yTextField.setText("");
+		return y;
+	}
+	
+	public int getWidthImage() {
+		int width = Integer.parseInt(widthTextField.getText().toString());
+		widthTextField.setText("");
+		return width;
+	}
+	
+	public int getHeightImage() {
+		int height = Integer.parseInt(heightTextField.getText().toString());
+		heightTextField.setText("");
+		return height;
+	}
 
 }

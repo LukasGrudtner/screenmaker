@@ -10,6 +10,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -19,6 +20,8 @@ import model.FinalScene;
 import model.InitialScene;
 import model.IntermediateScene;
 import model.Scene;
+import model.SceneWriterJSON;
+import model.Transition;
 import panels.BackgroundPanel;
 import panels.FilenamePanel;
 import panels.GeneratedScenesPanel;
@@ -37,6 +40,9 @@ public class MainWindow extends JFrame {
 	private GeneratedScenesPanel generatedScenesPanel;
 	private TextPanel textPanel;
 	
+	private JButton generateButton;
+	
+	private String filePath;
 	private ArrayList<Scene> sceneList;
 	
 	public MainWindow() {
@@ -50,6 +56,8 @@ public class MainWindow extends JFrame {
 		createWindow();
 		sceneList = new ArrayList<Scene>();
 		setListener();
+		
+		createGenerateButton();
 	}
 	
 	private void initPanels() {
@@ -92,14 +100,19 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String filenamePath = filenamePanel.getFilenamePath();
 				String backgroundPath = backgroundPanel.getBackgroundPath();
 				String text = textPanel.getText();
+				String imagePath = transitionImagePanel.getImagePath();
+				int x = transitionImagePanel.getXImage();
+				int y = transitionImagePanel.getYImage();
+				int width = transitionImagePanel.getWidthImage();
+				int height = transitionImagePanel.getHeightImage();
+				Transition transition = new Transition(imagePath, x, y, width, height);
 				
 				Scene scene;
 				
-				if (!filenamePath.isEmpty() && !backgroundPath.isEmpty()) {
-					scene = new InitialScene(backgroundPath, text);
+				if (!backgroundPath.isEmpty()) {
+					scene = new InitialScene(backgroundPath, text, transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 				}
@@ -111,14 +124,19 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String filenamePath = filenamePanel.getFilenamePath();
 				String backgroundPath = backgroundPanel.getBackgroundPath();
 				String text = textPanel.getText();
+				String imagePath = transitionImagePanel.getImagePath();
+				int x = transitionImagePanel.getXImage();
+				int y = transitionImagePanel.getYImage();
+				int width = transitionImagePanel.getWidthImage();
+				int height = transitionImagePanel.getHeightImage();
+				Transition transition = new Transition(imagePath, x, y, width, height);
 				
 				Scene scene;
 				
-				if (!filenamePath.isEmpty() && !backgroundPath.isEmpty()) {
-					scene = new IntermediateScene(backgroundPath, text);
+				if (!backgroundPath.isEmpty()) {
+					scene = new IntermediateScene(backgroundPath, text, transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 
@@ -130,20 +148,49 @@ public class MainWindow extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				String filenamePath = filenamePanel.getFilenamePath();
 				String backgroundPath = backgroundPanel.getBackgroundPath();
 				String text = textPanel.getText();
+				String imagePath = transitionImagePanel.getImagePath();
+				int x = transitionImagePanel.getXImage();
+				int y = transitionImagePanel.getYImage();
+				int width = transitionImagePanel.getWidthImage();
+				int height = transitionImagePanel.getHeightImage();
+				Transition transition = new Transition(imagePath, x, y, width, height);
 				
 				Scene scene;
 				
-				if (!filenamePath.isEmpty() && !backgroundPath.isEmpty()) {
-					scene = new FinalScene(backgroundPath, text);
+				if (!backgroundPath.isEmpty()) {
+					scene = new FinalScene(backgroundPath, text, transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 
 				}
 			}
 		});
+	}
+	
+	private void createGenerateButton() {
+		generateButton = new JButton("<html><b>Generate</b></html>");
+		generateButton.setSize(100, 30);
+		generateButton.setLocation(550, 500);
+		
+		generateButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				filePath = filenamePanel.getFilenamePath();
+				
+				if (!filePath.isEmpty()) {
+					SceneWriterJSON sceneWriter = new SceneWriterJSON(filePath, sceneList);
+					sceneWriter.write();
+					JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
+				} else {
+					JOptionPane.showMessageDialog(null, "O nome do arquivo de destino não foi informado!");
+				}
+			}
+		});
+		
+		getContentPane().add(generateButton);
 	}
 
 }

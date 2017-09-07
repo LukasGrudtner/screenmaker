@@ -4,8 +4,8 @@ public class InitialScene extends Scene {
 	
 	private Scene nextScene;
 	
-	public InitialScene(String backgroundPath, String text) {
-		super(backgroundPath, text);
+	public InitialScene(String backgroundPath, String text, Transition transition) {
+		super(backgroundPath, text, transition);
 	}
 	
 	public Scene getNextScene() {

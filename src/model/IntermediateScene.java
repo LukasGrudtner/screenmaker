@@ -5,8 +5,8 @@ public class IntermediateScene extends Scene {
 	private Scene previousScene;
 	private Scene nextScene;
 	
-	public IntermediateScene(String backgroundPath, String text) {
-		super(backgroundPath, text);
+	public IntermediateScene(String backgroundPath, String text, Transition transition) {
+		super(backgroundPath, text, transition);
 	}
 	
 	public Scene getPreviousScene() {

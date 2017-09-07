@@ -54,7 +54,9 @@ public class TextPanel extends JPanel {
 	}
 	
 	public String getText() {
-		return textTextField.getText().toString();
+		String text = textTextField.getText().toString();
+		textTextField.setText("");
+		return text;
 	}
 
 }

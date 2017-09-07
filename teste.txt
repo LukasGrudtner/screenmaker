@@ -1,0 +1,1 @@
+[{"backgroundPath":"legal.png","text":"ae","transition":{"imagePath":"sdf","x":2,"y":3,"width":4,"height":5}},{"backgroundPath":"legal.png","text":"ae","transition":{"imagePath":"sdf","x":2,"y":3,"width":4,"height":5}},{"backgroundPath":"legal.png","text":"ae","transition":{"imagePath":"sdf","x":2,"y":3,"width":4,"height":5}}]

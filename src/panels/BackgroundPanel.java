@@ -38,7 +38,9 @@ public class BackgroundPanel extends JPanel {
 	}
 	
 	public String getBackgroundPath() {
-		return backgroundTextField.getText().toString();
+		String backgroundPath = backgroundTextField.getText().toString();
+		backgroundTextField.setText("");
+		return backgroundPath;
 	}
 
 }

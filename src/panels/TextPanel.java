@@ -2,20 +2,33 @@ package panels;
 
 import java.awt.Color;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class TextPanel extends JPanel {
 	
-	private JTextField textTextField;
+	private JTextField textTextField, xTextField, yTextField, widthTextField, heightTextField;
+	private JComboBox colorComboBox;
+	private JComboBox fontSizeComboBox;
 	
 	public TextPanel() {
 		setPanel();
 		createTextLabel();
 		createTextTextField();
 		createColorLabel();
+		createColorComboBox();
 		createFontSizeLabel();
+		createFontSizeComboBox();
+		createXLabel();
+		createXTextField();
+		createYLabel();
+		createYTextField();
+		createWidthLabel();
+		createWidthTextField();
+		createHeightLabel();
+		createHeightTextField();
 	}
 	
 	private void setPanel() {
@@ -46,17 +59,135 @@ public class TextPanel extends JPanel {
 		this.add(colorLabel);
 	}
 	
+	private void createColorComboBox() {
+		String[] colors = {"Black", "White"};
+		colorComboBox = new JComboBox(colors);
+		colorComboBox.setSelectedIndex(0);
+		colorComboBox.setSize(80, 30);
+		colorComboBox.setLocation(10, 90);
+		this.add(colorComboBox);
+	}
+	
 	private void createFontSizeLabel() {
-		JLabel fontSizeLabel = new JLabel("<html><b>FontSize</html></b>");
+		JLabel fontSizeLabel = new JLabel("<html><b>Font size</html></b>");
 		fontSizeLabel.setSize(80, 30);
-		fontSizeLabel.setLocation(110, 60);
+		fontSizeLabel.setLocation(100, 60);
 		this.add(fontSizeLabel);
+	}
+	
+	private void createFontSizeComboBox() {
+		String[] values = {"1", "2", "3", "4", "5"};
+		fontSizeComboBox = new JComboBox(values);
+		fontSizeComboBox.setSelectedIndex(2);
+		fontSizeComboBox.setSize(60, 30);
+		fontSizeComboBox.setLocation(100, 90);
+		this.add(fontSizeComboBox);
+	}
+	
+	private void createXTextField() {
+		xTextField = new JTextField();
+		xTextField.setSize(40, 30);
+		xTextField.setLocation(170, 90);
+		this.add(xTextField);
+	}
+	
+	private void createXLabel() {
+		JLabel labelX = new JLabel("<html><b>X</b></html>");
+		labelX.setSize(30, 30);
+		labelX.setLocation(170, 60);
+		this.add(labelX);
+	}
+	
+	private void createYTextField() {
+		yTextField = new JTextField();
+		yTextField.setSize(40, 30);
+		yTextField.setLocation(220, 90);
+		this.add(yTextField);
+	}
+	
+	private void createYLabel() {
+		JLabel labelY = new JLabel("<html><b>Y</b></html>");
+		labelY.setSize(30, 30);
+		labelY.setLocation(220, 60);
+		this.add(labelY);
+	}
+	
+	private void createWidthTextField() {
+		widthTextField = new JTextField();
+		widthTextField.setSize(60, 30);
+		widthTextField.setLocation(270, 90);
+		this.add(widthTextField);
+	}
+	
+	private void createWidthLabel() {
+		JLabel labelWidth = new JLabel("<html><b>Width</b></html>");
+		labelWidth.setSize(60, 30);
+		labelWidth.setLocation(270, 60);
+		this.add(labelWidth);
+	}
+	
+	private void createHeightTextField() {
+		heightTextField = new JTextField();
+		heightTextField.setSize(60, 30);
+		heightTextField.setLocation(340,  90);
+		this.add(heightTextField);
+	}
+	
+	private void createHeightLabel() {
+		JLabel labelHeight = new JLabel("<html><b>Height</b></html>");
+		labelHeight.setSize(60, 30);
+		labelHeight.setLocation(340, 60);
+		this.add(labelHeight);
 	}
 	
 	public String getText() {
 		String text = textTextField.getText().toString();
-		textTextField.setText("");
 		return text;
+	}
+	
+	public Color getTextColor() {
+		String color = colorComboBox.getSelectedItem().toString();
+		if (color.equals("Black"))
+			return Color.BLACK;
+		else if (color.equals("White"))
+			return Color.WHITE;
+		return null;
+	}
+	
+	public int getFontSize() {
+		return Integer.parseInt(fontSizeComboBox.getSelectedItem().toString());
+	}
+	
+	public int getXText() {
+		int x = Integer.parseInt(xTextField.getText().toString());
+		return x;
+	}
+	
+	public int getYText() {
+		int y = Integer.parseInt(yTextField.getText().toString());
+		return y;
+	}
+	
+	public int getWidthText() {
+		int width = Integer.parseInt(widthTextField.getText().toString());
+		return width;
+	}
+	
+	public int getHeightText() {
+		int height = Integer.parseInt(heightTextField.getText().toString());
+		return height;
+	}
+	
+	public boolean allFieldsAreFilled() {
+		return true;
+	}
+	
+	public void clearFields() {
+		textTextField.setText("");
+		xTextField.setText("");
+		yTextField.setText("");
+		widthTextField.setText("");
+		heightTextField.setText("");
 	}
 
 }

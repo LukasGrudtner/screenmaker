@@ -1,0 +1,4 @@
+{"numberOfScenes":3}
+{"backgroundPath":"asd","transitionImage":"as","transitionImageWidth":2,"transitionImageX":2,"sceneType":"InitialScene","transitionImageY":2,"text":"sa","transitionImageHeight":2}
+{"backgroundPath":"sdf","transitionImage":"sdf","transitionImageWidth":2,"transitionImageX":2,"sceneType":"IntermediateScene","transitionImageY":2,"text":"sdf","transitionImageHeight":2}
+{"backgroundPath":"sdf","transitionImage":"sdf","transitionImageWidth":3,"transitionImageX":3,"sceneType":"FinalScene","transitionImageY":3,"text":"sdf","transitionImageHeight":3}

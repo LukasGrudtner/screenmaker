@@ -2,18 +2,22 @@ package panels;
 
 import java.awt.Color;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class TransitionImagePanel extends JPanel {
 	
-	private JTextField imagePathTextField, xTextField, yTextField, widthTextField, heightTextField;
+	private JTextField transitionImagePathTextField, xTextField, yTextField, widthTextField, heightTextField;
+	private JComboBox extensionComboBox;
 	
 	public TransitionImagePanel() {
 		setPanel();
 		createImagePathTextField();
 		createImagePathLabel();
+		createExtensionLabel();
+		createExtensionComboBox();
 		createXLabel();
 		createXTextField();
 		createYLabel();
@@ -32,17 +36,32 @@ public class TransitionImagePanel extends JPanel {
 	}
 	
 	private void createImagePathTextField() {
-		imagePathTextField = new JTextField();
-		imagePathTextField.setSize(150, 30);
-		imagePathTextField.setLocation(10, 30);
-		this.add(imagePathTextField);
+		transitionImagePathTextField = new JTextField();
+		transitionImagePathTextField.setSize(150, 30);
+		transitionImagePathTextField.setLocation(10, 30);
+		this.add(transitionImagePathTextField);
 	}
 	
 	private void createImagePathLabel() {
-		JLabel labelImagePath = new JLabel("<html><b>Image path</b></html>");
+		JLabel labelImagePath = new JLabel("<html><b>Transition image</b></html>");
 		labelImagePath.setSize(100, 30);
 		labelImagePath.setLocation(10, 0);
 		this.add(labelImagePath);
+	}
+	
+	private void createExtensionLabel() {
+		JLabel extensionLabel = new JLabel("<html><b>Extension</b></html>");
+		extensionLabel.setSize(100, 30);
+		extensionLabel.setLocation(170, 0);
+		this.add(extensionLabel);
+	}
+	
+	private void createExtensionComboBox() {
+		String[] extensions = {".png", ".jpg"};
+		extensionComboBox = new JComboBox(extensions);
+		extensionComboBox.setSize(80, 30);
+		extensionComboBox.setLocation(170, 30);
+		this.add(extensionComboBox);
 	}
 	
 	private void createXTextField() {
@@ -102,33 +121,48 @@ public class TransitionImagePanel extends JPanel {
 	}
 	
 	public String getImagePath() {
-		String imagePath = imagePathTextField.getText().toString();
-		imagePathTextField.setText("");
+		String imagePath = transitionImagePathTextField.getText().toString();
 		return imagePath;
+	}
+	
+	public String getExtension() {
+		return extensionComboBox.getSelectedItem().toString();
 	}
 	
 	public int getXImage() {
 		int x = Integer.parseInt(xTextField.getText().toString());
-		xTextField.setText("");
 		return x;
 	}
 	
 	public int getYImage() {
 		int y = Integer.parseInt(yTextField.getText().toString());
-		yTextField.setText("");
 		return y;
 	}
 	
 	public int getWidthImage() {
 		int width = Integer.parseInt(widthTextField.getText().toString());
-		widthTextField.setText("");
 		return width;
 	}
 	
 	public int getHeightImage() {
 		int height = Integer.parseInt(heightTextField.getText().toString());
-		heightTextField.setText("");
 		return height;
+	}
+	
+	public boolean allFieldsAreFilled() {
+		if (transitionImagePathTextField.getText().isEmpty() || xTextField.getText().isEmpty() ||
+				yTextField.getText().isEmpty() || widthTextField.getText().isEmpty() ||
+				heightTextField.getText().isEmpty())
+			return false;
+		return true;
+	}
+	
+	public void clearFields() {
+		transitionImagePathTextField.setText("");
+		xTextField.setText("");
+		yTextField.setText("");
+		widthTextField.setText("");
+		heightTextField.setText("");
 	}
 
 }

@@ -1,1 +1,3 @@
-[{"backgroundPath":"teste","text":"teset","transition":{"imagePath":"set","x":3,"y":4,"width":5,"height":6}}]
+{"numberOfScenes":2}
+{"backgroundPath":"fundo.png","transitionImage":"seta.png","transitionImageWidth":2,"transitionImageX":2,"sceneType":"InitialScene","transitionImageY":2,"text":"tesat","transitionImageHeight":2}
+{"backgroundPath":"fundo.png","transitionImage":"asdf.png","transitionImageWidth":2,"transitionImageX":2,"sceneType":"FinalScene","transitionImageY":2,"text":"sadf","transitionImageHeight":2}

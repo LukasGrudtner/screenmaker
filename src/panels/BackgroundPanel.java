@@ -2,18 +2,22 @@ package panels;
 
 import java.awt.Color;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class BackgroundPanel extends JPanel {
 	
-	JTextField backgroundTextField;
+	private JTextField backgroundTextField;
+	private JComboBox extensionComboBox;
 	
 	public BackgroundPanel() {
 		setPanel();
 		createBackgroundLabel();
 		createBackgroundTextField();
+		createExtensionLabel();
+		createExtensionComboBox();
 	}
 	
 	private void setPanel() {
@@ -37,10 +41,38 @@ public class BackgroundPanel extends JPanel {
 		this.add(backgroundTextField);
 	}
 	
+	private void createExtensionLabel() {
+		JLabel extensionLabel = new JLabel("<html><b>Extension</b></html>");
+		extensionLabel.setSize(100, 30);
+		extensionLabel.setLocation(170, 0);
+		this.add(extensionLabel);
+	}
+	
+	private void createExtensionComboBox() {
+		String[] extensions = {".png", ".jpg"};
+		extensionComboBox = new JComboBox(extensions);
+		extensionComboBox.setSize(80, 30);
+		extensionComboBox.setLocation(170, 30);
+		this.add(extensionComboBox);
+	}
+	
 	public String getBackgroundPath() {
 		String backgroundPath = backgroundTextField.getText().toString();
-		backgroundTextField.setText("");
 		return backgroundPath;
+	}
+	
+	public String getExtension() {
+		return extensionComboBox.getSelectedItem().toString();
+	}
+	
+	public boolean allFieldsAreFilled() {
+		if (backgroundTextField.getText().isEmpty())
+			return false;
+		return true;
+	}
+	
+	public void clearFields() {
+		backgroundTextField.setText("");
 	}
 
 }

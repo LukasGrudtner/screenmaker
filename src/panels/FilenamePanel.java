@@ -2,19 +2,22 @@ package panels;
 
 import java.awt.Color;
 
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class FilenamePanel extends JPanel {
 	
-	JTextField filenameTextField;
+	private JTextField filenameTextField;
+	private JComboBox extensionComboBox;
 	
 	public FilenamePanel() {
 		setPanel();
 		createFilenameLabel();
 		createFilenameTextField();
-		
+		createExtensionLabel();
+		createExtensionComboBox();
 	}
 	
 	private void setPanel() {
@@ -38,8 +41,27 @@ public class FilenamePanel extends JPanel {
 		this.add(filenameTextField);
 	}
 	
+	private void createExtensionLabel() {
+		JLabel extensionLabel = new JLabel("<html><b>Extension</b></html>");
+		extensionLabel.setSize(100, 30);
+		extensionLabel.setLocation(170, 0);
+		this.add(extensionLabel);
+	}
+	
+	private void createExtensionComboBox() {
+		String[] extensions = {".json"};
+		extensionComboBox = new JComboBox(extensions);
+		extensionComboBox.setSize(80, 30);
+		extensionComboBox.setLocation(170, 30);
+		this.add(extensionComboBox);
+	}
+	
 	public String getFilenamePath() {
 		return filenameTextField.getText().toString();
+	}
+	
+	public String getExtension() {
+		return extensionComboBox.getSelectedItem().toString();
 	}
 
 }

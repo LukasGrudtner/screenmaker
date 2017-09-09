@@ -5,8 +5,8 @@ public class IntermediateScene extends Scene {
 	private Scene previousScene;
 	private Scene nextScene;
 	
-	public IntermediateScene(String backgroundPath, String text, Transition transition) {
-		super(backgroundPath, text, transition);
+	public IntermediateScene(SerializableScene inputDataPool, Transition transition) {
+		super(inputDataPool, transition);
 	}
 	
 	public Scene getPreviousScene() {

@@ -13,7 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.InputDataPool;
+import model.SerializableScene;
+import model.Text;
 
 public class DisplayPanel extends JPanel {
 	
@@ -58,31 +59,43 @@ public class DisplayPanel extends JPanel {
 	public void setTransitionImage(BufferedImage bufferedImage, int x, int y, int width, int height) {
 		ImageIcon imageIcon = new ImageIcon(bufferedImage);
 		imageIcon.setImage(imageIcon.getImage().getScaledInstance(width, height, 100));
-		transitionImage.setBounds(x, y, width, height);
+		transitionImage.setBounds(x, this.getHeight()-y, width, height);
 		transitionImage.setIcon(imageIcon);
 	}
 	
-	public void setImages(String backgroundImg, String transitionImg, int x, int y, int width, int height) {
+	public void setImages(String backgroundImg, String transitionImg, int x, int y, int width, int height, Text text) {
 		try {
+			BufferedImage resizedImage = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
 			BufferedImage background = ImageIO.read(new File(backgroundImg));
+			Graphics2D graphics = resizedImage.createGraphics();
+			graphics.drawImage(background, 0, 0, this.getWidth(), this.getHeight(), null);
+			ImageIO.write(resizedImage, "PNG", new File("backgroundResized.png"));
+			
+			background = ImageIO.read(new File("backgroundResized.png"));
 			BufferedImage transition = ImageIO.read(new File(transitionImg));
-			Graphics2D graphics = background.createGraphics();
-			graphics.drawImage(transition, x, y, width, height, null);
+			graphics = background.createGraphics();
+			graphics.drawImage(transition, x, this.getHeight()-(height+y), width, height, null);
+			ImageIO.write(background, "PNG", new File("backgroundResized.png"));
+//			graphics.dispose();
+			
+			background = ImageIO.read(new File("backgroundResized.png"));
+			BufferedImage textLabel = ImageIO.read(new File("textLabel.png"));
+			graphics = background.createGraphics();
+			graphics.drawImage(textLabel, text.getX(), this.getHeight()-(50+text.getY()), text.getWidth(), 30, null);
 			graphics.dispose();
 			
-			setBackgroundImage(background);
+			setTextImage(textLabel, text);
 			setTransitionImage(transition, x, y, width, height);
+			setBackgroundImage(background);
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "A imagem inserida não foi encontrada!");
 		}
 	}
 	
-	public void setText(InputDataPool inputDataPool) {
-		textLabel.setText(inputDataPool.getText());
-		textLabel.setLocation(inputDataPool.getTextX(), inputDataPool.getTextY());
-		textLabel.setSize(inputDataPool.getTextWidth(), inputDataPool.getTextHeight());
-		textLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 10*inputDataPool.getFontSize()));
-		textLabel.setForeground(inputDataPool.getTextColor());
+	public void setTextImage(BufferedImage bufferedImage, Text text) {
+		ImageIcon imageIcon = new ImageIcon(bufferedImage);
+		imageIcon.setImage(imageIcon.getImage().getScaledInstance(text.getWidth(), 30, 100));
+		textLabel.setIcon(imageIcon);
 	}
 	
 }

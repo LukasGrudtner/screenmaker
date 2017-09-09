@@ -2,11 +2,15 @@ package model;
 
 import java.awt.Color;
 
-public class InputDataPool {
+public class SerializableScene {
 	
+	private String sceneType;
 	private String backgroundPath;
 	private String text;
-	private Color textColor;
+	private int textColorRed;
+	private int textColorGreen;
+	private int textColorBlue;
+	private int textColorAlpha;
 	private int fontSize;
 	private int textX;
 	private int textY;
@@ -18,10 +22,21 @@ public class InputDataPool {
 	private int transitionImageWidth;
 	private int transitionImageHeight;
 	
-	public InputDataPool() {
-		
+	public SerializableScene() {
+	
 	}
 	
+	
+	public String getSceneType() {
+		return sceneType;
+	}
+
+
+	public void setSceneType(String sceneType) {
+		this.sceneType = sceneType;
+	}
+
+
 	public String getBackgroundPath() {
 		return backgroundPath;
 	}
@@ -38,12 +53,27 @@ public class InputDataPool {
 		this.text = text;
 	}
 	
-	public Color getTextColor() {
-		return textColor;
+	public int getTextColorRed() {
+		return textColorRed;
+	}
+	
+	public int getTextColorGreen() {
+		return textColorGreen;
+	}
+	
+	public int getTextColorBlue() {
+		return textColorBlue;
+	}
+	
+	public int getTextColorAlpha() {
+		return textColorAlpha;
 	}
 	
 	public void setTextColor(Color textColor) {
-		this.textColor = textColor;
+		this.textColorRed = textColor.getRed();
+		this.textColorGreen = textColor.getGreen();
+		this.textColorBlue = textColor.getBlue();
+		this.textColorAlpha = textColor.getAlpha();
 	}
 	
 	public int getFontSize() {

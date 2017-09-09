@@ -2,22 +2,16 @@ package model;
 
 public abstract class Scene {
 	
-	protected String backgroundPath;
-	protected String text;
+	protected SerializableScene serializableScene;
 	protected Transition transition;
 	
-	public Scene(String backgroundPath, String text, Transition transition) {
-		this.backgroundPath = backgroundPath;
-		this.text = text;
+	public Scene(SerializableScene inputDataPool, Transition transition) {
+		this.serializableScene = inputDataPool;
 		this.transition = transition;
 	}
 	
-	public String getBackground() {
-        return backgroundPath;
-    }
-	
-	public String getText() {
-        return text;
+	public SerializableScene getSerializableScene() {
+        return serializableScene;
     }
 	
 	public Transition getTransition() {

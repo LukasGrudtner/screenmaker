@@ -18,7 +18,8 @@ import javax.swing.UIManager;
 
 import model.FinalScene;
 import model.InitialScene;
-import model.InputDataPool;
+import model.SerializableScene;
+import model.Text;
 import model.IntermediateScene;
 import model.Scene;
 import model.SceneWriterJSON;
@@ -52,7 +53,6 @@ public class MainWindow extends JFrame {
 	public MainWindow() {
 		super("ScreenMaker");
 		setLayout(null);
-		
 		appearance = UIManager.getInstalledLookAndFeels();
 		this.mudeTheLookAndFeel(1);
 		
@@ -111,12 +111,12 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (allFieldsAreFilled()) {
-					InputDataPool inputDataPool = getInputDataPool();
+					SerializableScene inputDataPool = getInputDataPool();
 					Transition transition = new Transition(inputDataPool.getTransitionImagePath(), inputDataPool.getTransitionImageX(),
 							inputDataPool.getTransitionImageY(), inputDataPool.getTransitionImageWidth(), 
 							inputDataPool.getTransitionImageHeight());
 					
-					Scene scene = new InitialScene(inputDataPool.getBackgroundPath(), inputDataPool.getText(), transition);
+					Scene scene = new InitialScene(getInputDataPool(), transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 					
@@ -137,14 +137,14 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (allFieldsAreFilled()) {
-					InputDataPool inputDataPool = getInputDataPool();
+					SerializableScene inputDataPool = getInputDataPool();
 					Transition transition = new Transition(inputDataPool.getTransitionImagePath(), inputDataPool.getTransitionImageX(),
 							inputDataPool.getTransitionImageY(), inputDataPool.getTransitionImageWidth(), 
 							inputDataPool.getTransitionImageHeight());
 					
 					Scene scene;
 				
-					scene = new IntermediateScene(inputDataPool.getBackgroundPath(), inputDataPool.getText(), transition);
+					scene = new IntermediateScene(getInputDataPool(), transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 					
@@ -161,14 +161,14 @@ public class MainWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (allFieldsAreFilled()) {
-					InputDataPool inputDataPool = getInputDataPool();
+					SerializableScene inputDataPool = getInputDataPool();
 					Transition transition = new Transition(inputDataPool.getTransitionImagePath(), inputDataPool.getTransitionImageX(),
 							inputDataPool.getTransitionImageY(), inputDataPool.getTransitionImageWidth(), 
 							inputDataPool.getTransitionImageHeight());
 					
 					Scene scene;
 					
-					scene = new FinalScene(inputDataPool.getBackgroundPath(), inputDataPool.getText(), transition);
+					scene = new FinalScene(getInputDataPool(), transition);
 					sceneList.add(scene);
 					generatedScenesPanel.updateList(sceneList);
 					
@@ -199,7 +199,7 @@ public class MainWindow extends JFrame {
 				String extension = filenamePanel.getExtension();
 				
 				if (!filePath.isEmpty()) {
-					SceneWriterJSON sceneWriter = new SceneWriterJSON(filePath+extension, sceneList);
+					SceneWriterJSON sceneWriter = new SceneWriterJSON(filePath+extension, serializeScenes(sceneList));
 					sceneWriter.write();
 					JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
 				} else {
@@ -226,11 +226,15 @@ public class MainWindow extends JFrame {
 	}
 	
 	private void showScreenView() {
-		InputDataPool inputDataPool = getInputDataPool();
-		displayPanel.setImages(inputDataPool.getBackgroundPath(), inputDataPool.getTransitionImagePath(), 
-				inputDataPool.getTransitionImageX(), inputDataPool.getTransitionImageY(), inputDataPool.getTransitionImageWidth(),
-				inputDataPool.getTransitionImageHeight());
-		displayPanel.setText(inputDataPool);
+		SerializableScene serializableScene = getInputDataPool();
+		Text text = new Text();
+		text.setWidth(serializableScene.getTextWidth());
+		text.setX(serializableScene.getTextX());
+		text.setY(serializableScene.getTextY());
+		
+		displayPanel.setImages(serializableScene.getBackgroundPath(), serializableScene.getTransitionImagePath(), 
+				serializableScene.getTransitionImageX(), serializableScene.getTransitionImageY(), serializableScene.getTransitionImageWidth(),
+				serializableScene.getTransitionImageHeight(), text);
 		
 	}
 	
@@ -256,8 +260,20 @@ public class MainWindow extends JFrame {
 		return false;
 	}
 	
-	private InputDataPool getInputDataPool() {
-		InputDataPool inputDataPool = new InputDataPool();
+	private ArrayList<SerializableScene> serializeScenes(ArrayList<Scene> sceneList) {
+		ArrayList<SerializableScene> serializableSceneList = new ArrayList<SerializableScene>();
+		
+		for (Scene scene : sceneList) {
+			SerializableScene serializableScene = scene.getSerializableScene();
+			serializableScene.setSceneType(scene.getClass().getSimpleName());
+			serializableSceneList.add(serializableScene);
+		}
+		
+		return serializableSceneList;
+	}
+	
+	private SerializableScene getInputDataPool() {
+		SerializableScene serializableScene = new SerializableScene();
 		String backgroundPath = backgroundPanel.getBackgroundPath() + backgroundPanel.getExtension();
 		String text = textPanel.getText();
 		Color textColor = textPanel.getTextColor();
@@ -272,21 +288,21 @@ public class MainWindow extends JFrame {
 		int transitionImageWidth = transitionImagePanel.getWidthImage();
 		int transitionImageHeight = transitionImagePanel.getHeightImage();
 		
-		inputDataPool.setBackgroundPath(backgroundPath);
-		inputDataPool.setText(text);
-		inputDataPool.setTextColor(textColor);
-		inputDataPool.setFontSize(fontSize);
-		inputDataPool.setTextX(textX);
-		inputDataPool.setTextY(textY);
-		inputDataPool.setTextWidth(textWidth);
-		inputDataPool.setTextHeight(textHeight);
-		inputDataPool.setTransitionImagePath(transitionImagePath);
-		inputDataPool.setTransitionImageX(transitionImageX);
-		inputDataPool.setTransitionImageY(transitionImageY);
-		inputDataPool.setTransitionImageWidth(transitionImageWidth);
-		inputDataPool.setTransitionImageHeight(transitionImageHeight);
+		serializableScene.setBackgroundPath(backgroundPath);
+		serializableScene.setText(text);
+		serializableScene.setTextColor(textColor);
+		serializableScene.setFontSize(fontSize);
+		serializableScene.setTextX(textX);
+		serializableScene.setTextY(textY);
+		serializableScene.setTextWidth(textWidth);
+		serializableScene.setTextHeight(textHeight);
+		serializableScene.setTransitionImagePath(transitionImagePath);
+		serializableScene.setTransitionImageX(transitionImageX);
+		serializableScene.setTransitionImageY(transitionImageY);
+		serializableScene.setTransitionImageWidth(transitionImageWidth);
+		serializableScene.setTransitionImageHeight(transitionImageHeight);
 		
-		return inputDataPool;
+		return serializableScene;
 	}
 	
 	private void clearFields() {

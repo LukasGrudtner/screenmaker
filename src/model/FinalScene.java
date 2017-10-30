@@ -4,8 +4,8 @@ public class FinalScene extends Scene {
 	
 	private Scene previousScene;
 	
-	public FinalScene(SerializableScene inputDataPool, Transition transition) {
-		super(inputDataPool, transition);
+	public FinalScene(SerializableScene inputDataPool) {
+		super(inputDataPool);
 	}
 	
 	public Scene getPreviousScene() {

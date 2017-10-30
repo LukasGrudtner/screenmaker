@@ -73,7 +73,7 @@ public class DisplayPanel extends JPanel {
 		textLabel.setIcon(imageIcon);
 	}
 	
-	public void showDisplay(String backgroundPath, Transition transition, Text text) {
+	public void showDisplay(String backgroundPath, Text text) {
 		try {
 			/* BufferedImage para o plano de fundo. */
 			BufferedImage background = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -88,9 +88,9 @@ public class DisplayPanel extends JPanel {
 			
 			/* Insere a imagem de transição. */
 			background = ImageIO.read(new File(ASSETS_PATH + RESIZED_BACKGROUND));
-			BufferedImage transitionImage = ImageIO.read(new File(ASSETS_PATH + transition.getImagePath()));
+//			BufferedImage transitionImage = ImageIO.read(new File(ASSETS_PATH + transition.getImagePath()));
 			graphics = background.createGraphics();
-			graphics.drawImage(transitionImage, transition.getX(), this.getHeight()-(transition.getHeight()+transition.getY()), transition.getWidth(), transition.getHeight(), null);
+//			graphics.drawImage(transitionImage, transition.getX(), this.getHeight()-(transition.getHeight()+transition.getY()), transition.getWidth(), transition.getHeight(), null);
 			ImageIO.write(background, "PNG", new File(ASSETS_PATH + RESIZED_BACKGROUND));
 			
 			/* Insere a imagem de texto. */
@@ -102,7 +102,7 @@ public class DisplayPanel extends JPanel {
 				setTextImage(textLabel, text);
 			}
 			
-			setTransitionImage(transitionImage, transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
+//			setTransitionImage(transitionImage, transition.getX(), transition.getY(), transition.getWidth(), transition.getHeight());
 			setBackgroundImage(background);
 			
 			graphics.dispose();

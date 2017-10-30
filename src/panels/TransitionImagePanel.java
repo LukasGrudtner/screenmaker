@@ -130,30 +130,43 @@ public class TransitionImagePanel extends JPanel {
 	}
 	
 	public int getXImage() {
-		int x = Integer.parseInt(xTextField.getText().toString());
+		String input = xTextField.getText().toString();
+		int x = 0;
+		if (!input.isEmpty())
+			x = Integer.parseInt(input);
 		return x;
 	}
 	
 	public int getYImage() {
-		int y = Integer.parseInt(yTextField.getText().toString());
+		String input = yTextField.getText().toString();
+		int y = 0;
+		if (!input.isEmpty())
+			y = Integer.parseInt(input);
 		return y;
 	}
 	
 	public int getWidthImage() {
-		int width = Integer.parseInt(widthTextField.getText().toString());
+		String input = widthTextField.getText().toString();
+		int width = 0;
+		if (!input.isEmpty())
+			width = Integer.parseInt(input);
 		return width;
 	}
 	
 	public int getHeightImage() {
-		int height = Integer.parseInt(heightTextField.getText().toString());
+		String input = heightTextField.getText().toString();
+		int height = 0;
+		if (!input.isEmpty())
+			height = Integer.parseInt(input);
 		return height;
 	}
 	
 	public boolean allFieldsAreFilled() {
-		if (transitionImagePathTextField.getText().isEmpty() || xTextField.getText().isEmpty() ||
-				yTextField.getText().isEmpty() || widthTextField.getText().isEmpty() ||
-				heightTextField.getText().isEmpty())
-			return false;
+//		if (transitionImagePathTextField.getText().isEmpty())
+//			return true;
+//		else if (xTextField.getText().isEmpty() || yTextField.getText().isEmpty() || widthTextField.getText().isEmpty() ||
+//				heightTextField.getText().isEmpty())
+//			return false;
 		return true;
 	}
 	

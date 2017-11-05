@@ -9,7 +9,8 @@ import javax.swing.JTextField;
 
 public class TextPanel extends JPanel {
 	
-	private JTextField textTextField; //, xTextField, yTextField, widthTextField, heightTextField;
+	private JTextField textTextField, positionTextField;
+	private JComboBox positionComboBox;
 	private JComboBox colorComboBox;
 	private JComboBox fontSizeComboBox;
 	
@@ -21,14 +22,8 @@ public class TextPanel extends JPanel {
 		createColorComboBox();
 		createFontSizeLabel();
 		createFontSizeComboBox();
-//		createXLabel();
-//		createXTextField();
-//		createYLabel();
-//		createYTextField();
-//		createWidthLabel();
-//		createWidthTextField();
-//		createHeightLabel();
-//		createHeightTextField();
+		createPositionLabel();
+		createPositionComboBox();
 	}
 	
 	private void setPanel() {
@@ -84,61 +79,21 @@ public class TextPanel extends JPanel {
 		this.add(fontSizeComboBox);
 	}
 	
-//	private void createXTextField() {
-//		xTextField = new JTextField();
-//		xTextField.setSize(40, 30);
-//		xTextField.setLocation(170, 90);
-//		this.add(xTextField);
-//	}
-//	
-//	private void createXLabel() {
-//		JLabel labelX = new JLabel("<html><b>X</b></html>");
-//		labelX.setSize(30, 30);
-//		labelX.setLocation(170, 60);
-//		this.add(labelX);
-//	}
-//	
-//	private void createYTextField() {
-//		yTextField = new JTextField();
-//		yTextField.setSize(40, 30);
-//		yTextField.setLocation(220, 90);
-//		this.add(yTextField);
-//	}
-//	
-//	private void createYLabel() {
-//		JLabel labelY = new JLabel("<html><b>Y</b></html>");
-//		labelY.setSize(30, 30);
-//		labelY.setLocation(220, 60);
-//		this.add(labelY);
-//	}
-//	
-//	private void createWidthTextField() {
-//		widthTextField = new JTextField();
-//		widthTextField.setSize(60, 30);
-//		widthTextField.setLocation(270, 90);
-//		this.add(widthTextField);
-//	}
-//	
-//	private void createWidthLabel() {
-//		JLabel labelWidth = new JLabel("<html><b>Width</b></html>");
-//		labelWidth.setSize(60, 30);
-//		labelWidth.setLocation(270, 60);
-//		this.add(labelWidth);
-//	}
-//	
-//	private void createHeightTextField() {
-//		heightTextField = new JTextField();
-//		heightTextField.setSize(60, 30);
-//		heightTextField.setLocation(340,  90);
-//		this.add(heightTextField);
-//	}
-//	
-//	private void createHeightLabel() {
-//		JLabel labelHeight = new JLabel("<html><b>Height</b></html>");
-//		labelHeight.setSize(60, 30);
-//		labelHeight.setLocation(340, 60);
-//		this.add(labelHeight);
-//	}
+	private void createPositionLabel() {
+		JLabel positionLabel = new JLabel("<html><b>Position</html></b>");
+		positionLabel.setSize(80, 30);
+		positionLabel.setLocation(180, 60);
+		this.add(positionLabel);
+	}
+	
+	private void createPositionComboBox() {
+		String[] values = {"Top Right", "Top Center", "Bottom Center"};
+		positionComboBox = new JComboBox(values);
+		positionComboBox.setSelectedIndex(2);
+		positionComboBox.setSize(120, 30);
+		positionComboBox.setLocation(180, 90);
+		this.add(positionComboBox);
+	}
 	
 	public String getText() {
 		String text = textTextField.getText().toString();
@@ -154,42 +109,13 @@ public class TextPanel extends JPanel {
 		return null;
 	}
 	
+	public String getTextPosition() {
+		return positionComboBox.getSelectedItem().toString();
+	}
+	
 	public int getFontSize() {
 		return Integer.parseInt(fontSizeComboBox.getSelectedItem().toString());
 	}
-	
-//	public int getXText() {
-//		String input = xTextField.getText().toString();
-//		int x = 0;
-//		if (!input.isEmpty())
-//			x = Integer.parseInt(input);
-//		return x;
-//			
-//	}
-//	
-//	public int getYText() {
-//		String input = yTextField.getText().toString();
-//		int y = 0;
-//		if (!input.isEmpty())
-//			y = Integer.parseInt(input);
-//		return y;
-//	}
-//	
-//	public int getWidthText() {
-//		String input = widthTextField.getText().toString();
-//		int width = 0;
-//		if (!input.isEmpty())
-//			width = Integer.parseInt(input);
-//		return width;
-//	}
-//	
-//	public int getHeightText() {
-//		String input = heightTextField.getText().toString();
-//		int height = 0;
-//		if (!input.isEmpty())
-//			height = Integer.parseInt(input);
-//		return height;
-//	}
 	
 	public boolean allFieldsAreFilled() {
 		return true;
@@ -197,10 +123,6 @@ public class TextPanel extends JPanel {
 	
 	public void clearFields() {
 		textTextField.setText("");
-//		xTextField.setText("");
-//		yTextField.setText("");
-//		widthTextField.setText("");
-//		heightTextField.setText("");
 	}
 
 }

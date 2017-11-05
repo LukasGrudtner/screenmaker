@@ -254,11 +254,13 @@ public class MainWindow extends JFrame {
 		SerializableScene serializableScene = new SerializableScene();
 		String backgroundPath = backgroundPanel.getBackgroundPath() + backgroundPanel.getExtension();
 		String text = textPanel.getText();
+		String textPosition = textPanel.getTextPosition();
 		Color textColor = textPanel.getTextColor();
 		int fontSize = textPanel.getFontSize();
 		
 		serializableScene.setBackgroundPath(backgroundPath);
 		serializableScene.setText(text);
+		serializableScene.setTextPosition(textPosition);
 		serializableScene.setTextColor(textColor);
 		serializableScene.setFontSize(fontSize);
 		

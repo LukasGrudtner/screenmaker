@@ -7,6 +7,7 @@ public class SerializableScene {
 	private String sceneType;
 	private String backgroundPath;
 	private String text;
+	private String textPosition;
 	private int textColorRed;
 	private int textColorGreen;
 	private int textColorBlue;
@@ -42,6 +43,14 @@ public class SerializableScene {
 	
 	public void setText(String text) {
 		this.text = text;
+	}
+	
+	public String getTextPosition() {
+		return textPosition;
+	}
+	
+	public void setTextPosition(String textPosition) {
+		this.textPosition = textPosition;
 	}
 	
 	public int getTextColorRed() {

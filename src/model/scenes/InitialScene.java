@@ -1,4 +1,4 @@
-package model;
+package model.scenes;
 
 public class InitialScene extends Scene {
 	

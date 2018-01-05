@@ -1,4 +1,4 @@
-package panels;
+package view.panels;
 
 import java.awt.Color;
 
@@ -35,7 +35,7 @@ public class SceneButtonsPanel extends JPanel {
 		intermediateSceneButton = new JButton("<html><b>IntermediateScene</b></html>");
 		intermediateSceneButton.setSize(150, 30);
 		intermediateSceneButton.setLocation(130, 10);
-		intermediateSceneButton.setToolTipText("Cria uma cena intermedi·ria.");
+		intermediateSceneButton.setToolTipText("Cria uma cena intermedi√°ria.");
 		this.add(intermediateSceneButton);
 	}
 	

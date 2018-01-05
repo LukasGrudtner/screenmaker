@@ -16,21 +16,17 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import model.FinalScene;
-import model.InitialScene;
-import model.SerializableScene;
-import model.Text;
-import model.IntermediateScene;
-import model.Scene;
-import model.SceneWriterJSON;
-import model.Transition;
-import panels.BackgroundPanel;
-import panels.DisplayPanel;
-import panels.FilenamePanel;
-import panels.GeneratedScenesPanel;
-import panels.SceneButtonsPanel;
-import panels.TextPanel;
-import panels.TransitionImagePanel;
+import model.scenes.*;
+import model.text.*;
+import model.transition.*;
+import control.SceneWriter;
+import view.panels.BackgroundPanel;
+import view.panels.DisplayPanel;
+import view.panels.FilenamePanel;
+import view.panels.GeneratedScenesPanel;
+import view.panels.SceneButtonsPanel;
+import view.panels.TextPanel;
+import view.panels.TransitionImagePanel;
 
 public class MainWindow extends JFrame {
 	
@@ -84,7 +80,7 @@ public class MainWindow extends JFrame {
 	}
 	
 	private void mudeTheLookAndFeel(int valor) {
-		// Muda aparência e comportamento
+		// Muda aparï¿½ncia e comportamento
 		try {
 			UIManager.setLookAndFeel(appearance[valor].getClassName());
 			SwingUtilities.updateComponentTreeUI(this);
@@ -180,11 +176,11 @@ public class MainWindow extends JFrame {
 				String extension = filenamePanel.getExtension();
 				
 				if (!filePath.isEmpty()) {
-					SceneWriterJSON sceneWriter = new SceneWriterJSON(filePath+extension, serializeScenes(sceneList));
+					SceneWriter sceneWriter = new SceneWriter(filePath+extension, serializeScenes(sceneList));
 					sceneWriter.write();
 					JOptionPane.showMessageDialog(null, "Arquivo gerado com sucesso!");
 				} else {
-					JOptionPane.showMessageDialog(null, "O nome do arquivo de destino não foi informado!");
+					JOptionPane.showMessageDialog(null, "O nome do arquivo de destino nï¿½o foi informado!");
 				}
 			}
 		});

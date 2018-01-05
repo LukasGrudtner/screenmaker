@@ -1,4 +1,4 @@
-package panels;
+package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import model.Scene;
+import model.scenes.Scene;
 
 public class GeneratedScenesPanel extends JPanel {
 	

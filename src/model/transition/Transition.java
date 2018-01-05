@@ -1,4 +1,4 @@
-package model;
+package model.transition;
 
 public class Transition {
 	

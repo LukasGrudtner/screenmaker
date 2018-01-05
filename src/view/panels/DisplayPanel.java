@@ -1,4 +1,4 @@
-package panels;
+package view.panels;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -13,9 +13,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.SerializableScene;
-import model.Text;
-import model.Transition;
+import model.scenes.SerializableScene;
+import model.text.Text;
+import model.transition.Transition;
 
 public class DisplayPanel extends JPanel {
 	
@@ -81,12 +81,12 @@ public class DisplayPanel extends JPanel {
 			/* BufferedImage para a imagem do plano de fundo. */
 			BufferedImage backgroundImage = ImageIO.read(new File(ASSETS_PATH + backgroundPath));
 			
-			/* Cria uma tela com as dimensões especificadas para o background, e desenha a imagem do background. */
+			/* Cria uma tela com as dimensï¿½es especificadas para o background, e desenha a imagem do background. */
 			Graphics2D graphics = background.createGraphics();
 			graphics.drawImage(backgroundImage, 0, 0, this.getWidth(), this.getHeight(), null);
 			ImageIO.write(background, "PNG", new File(ASSETS_PATH + RESIZED_BACKGROUND));
 			
-			/* Insere a imagem de transição. */
+			/* Insere a imagem de transiï¿½ï¿½o. */
 			background = ImageIO.read(new File(ASSETS_PATH + RESIZED_BACKGROUND));
 //			BufferedImage transitionImage = ImageIO.read(new File(ASSETS_PATH + transition.getImagePath()));
 			graphics = background.createGraphics();
@@ -107,7 +107,7 @@ public class DisplayPanel extends JPanel {
 			
 			graphics.dispose();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "A imagem inserida não foi encontrada!");
+			JOptionPane.showMessageDialog(null, "A imagem inserida nï¿½o foi encontrada!");
 		}
 	}
 	
